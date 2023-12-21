@@ -43,6 +43,12 @@ def play():
     mixer.music.load(song)
     mixer.music.play(loops=0)
 
+#function to stop song
+def stop():
+    song= song_list.get(ACTIVE)
+    mixer.music.load(song)
+    mixer.music.stop(loops=0)
+
 #function for next song
 def next_song():
     next_one= song_list.curselection()
