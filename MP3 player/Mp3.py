@@ -141,7 +141,7 @@ add_song_menu.add_command(label="Add songs to playlist", command=add_song)
 #delete songs
 remove_song_menu= Menu(song_menu)
 song_menu.add_cascade(label="Remove Songs",menu=remove_song_menu)
-remove_song_menu.add_command(label="Delete the select", command= delete_song)
+remove_song_menu.add_command(label="Delete the selected song", command= delete_song)
 remove_song_menu.add_command(label="Delete all songs from Playlist", command= delete_all)
 
 
