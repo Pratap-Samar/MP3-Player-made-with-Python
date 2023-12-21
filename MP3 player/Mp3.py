@@ -5,7 +5,7 @@ from tkinter import ttk
 
 
 root = Tk()
-root.title=('MP3 Player')
+root.title("MP3 Player")
 root.geometry("600x400")
 
 
@@ -48,6 +48,7 @@ def stop():
     song= song_list.get(ACTIVE)
     mixer.music.load(song)
     mixer.music.stop(loops=0)
+    
 
 #function for next song
 def next_song():
@@ -117,7 +118,7 @@ control.grid(row=1,column=0,pady=20)
 
 #MP3 control buttons
 play_button= Button(control, image=play_img, borderwidth=0, command=play)
-stop_button= Button(control, image=stop_img, borderwidth=0)
+stop_button= Button(control, image=stop_img, borderwidth=0, command=stop)
 pause_button= Button(control, image=pause_img, borderwidth=0, command= lambda:pause(paused))
 previous_button= Button(control, image=previous_img, borderwidth=0, command=previous_song)
 next_button= Button(control, image=next_img, borderwidth=0, command= next_song)
@@ -140,7 +141,7 @@ add_song_menu.add_command(label="Add songs to playlist", command=add_song)
 #delete songs
 remove_song_menu= Menu(song_menu)
 song_menu.add_cascade(label="Remove Songs",menu=remove_song_menu)
-remove_song_menu.add_command(label="Delete A song from Playlist", command= delete_song)
+remove_song_menu.add_command(label="Delete the select", command= delete_song)
 remove_song_menu.add_command(label="Delete all songs from Playlist", command= delete_all)
 
 
