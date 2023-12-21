@@ -47,7 +47,7 @@ def play():
 def stop():
     song= song_list.get(ACTIVE)
     mixer.music.load(song)
-    mixer.music.stop(loops=0)
+    mixer.music.stop()
     
 
 #function for next song
