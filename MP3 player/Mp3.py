@@ -1,5 +1,5 @@
 from tkinter import *
-from pygame import mixer
+from pygame import mixer, time
 from tkinter import filedialog
 from tkinter import ttk
 
@@ -42,6 +42,14 @@ def play():
     song= song_list.get(ACTIVE)
     mixer.music.load(song)
     mixer.music.play(loops=0)
+    check_music()
+
+#to automatically move to next song
+def check_music():
+    if not mixer.music.get_busy():
+        next_song()
+    # check again after 1000ms
+    root.after(1000, check_music)
 
 #function to stop song
 def stop():
