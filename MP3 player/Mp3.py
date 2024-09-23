@@ -20,7 +20,6 @@ def add_song():
 #delete one song
 def delete_song():
     song_list.delete(ANCHOR)
-    
     mixer.music.stop()
 
 #delete all song
@@ -32,13 +31,17 @@ def volume(x):
     mixer.music.set_volume(volume_slider.get())
 
 
-#Global variable for Pause
+#Global variable for Pause and Stop
 global paused
+global stopped
 paused = False
+stopped = False
 
 
 #function to play song
 def play():
+    global stopped
+    stopped = False
     song= song_list.get(ACTIVE)
     mixer.music.load(song)
     mixer.music.play(loops=0)
@@ -46,17 +49,18 @@ def play():
 
 #to automatically move to next song
 def check_music():
-    if not mixer.music.get_busy():
+    if not mixer.music.get_busy() and not stopped:
         next_song()
     # check again after 1000ms
     root.after(1000, check_music)
 
 #function to stop song
 def stop():
+    global stopped
+    stopped = True
     song= song_list.get(ACTIVE)
     mixer.music.load(song)
     mixer.music.stop()
-    
 
 #function for next song
 def next_song():
@@ -117,7 +121,6 @@ volume_slider.pack(pady=10)
 #MP3 button images
 play_img= PhotoImage(file='images/play.png')
 stop_img= PhotoImage(file='images/stop.png')
-pause_img= PhotoImage(file='images/pause.png')
 previous_img= PhotoImage(file='images/prev.png')
 next_img= PhotoImage(file='images/next.png')
 
@@ -127,13 +130,11 @@ control.grid(row=1,column=0,pady=20)
 #MP3 control buttons
 play_button= Button(control, image=play_img, borderwidth=0, command=play)
 stop_button= Button(control, image=stop_img, borderwidth=0, command=stop)
-pause_button= Button(control, image=pause_img, borderwidth=0, command= lambda:pause(paused))
 previous_button= Button(control, image=previous_img, borderwidth=0, command=previous_song)
 next_button= Button(control, image=next_img, borderwidth=0, command= next_song)
 
-play_button.grid(row=0, column=3, padx=10)
-stop_button.grid(row=0, column=2, padx=10)
-pause_button.grid(row=0, column=4, padx=10)
+play_button.grid(row=0, column=2, padx=10)
+stop_button.grid(row=0, column=3, padx=10)
 previous_button.grid(row=0, column=1, padx=10)
 next_button.grid(row=0, column=5, padx=10)
 
